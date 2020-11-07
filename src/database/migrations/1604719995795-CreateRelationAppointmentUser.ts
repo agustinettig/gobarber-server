@@ -25,7 +25,7 @@ export default class CreateRelationAppointmentUser1604719995795 implements Migra
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropColumn('appointments', 'provider_id');
         await queryRunner.dropForeignKey('appointments', 'AppointmentProvider');
+        await queryRunner.dropColumn('appointments', 'provider_id');
     }
 }

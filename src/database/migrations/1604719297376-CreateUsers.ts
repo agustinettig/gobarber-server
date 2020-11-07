@@ -20,6 +20,7 @@ export default class CreateUsers1604719297376 implements MigrationInterface {
                     {
                         name: 'email',
                         type: 'varchar',
+                        isUnique: true,
                     },
                     {
                         name: 'password',
