@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { verify } from 'jsonwebtoken';
-import AuthConfig from '../config/AuthConfig';
+import authConfig from '../config/AuthConfig';
 
 interface TokenPayload {
     sub: string;
@@ -16,7 +16,7 @@ export default function ensureAuthenticated(request: Request, response: Response
     const [, token] = authHeader.split(' ');
 
     try {
-        const decoded = verify(token, AuthConfig.jwt.secret);
+        const decoded = verify(token, authConfig.jwt.secret);
 
         const { sub } = decoded as TokenPayload;
 
