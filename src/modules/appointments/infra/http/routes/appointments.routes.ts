@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import ensureAuthenticated from '@shared/infra/http/middlewares/ensureAuthenticated';
+import ensureAuthenticated from '@modules/users/infra/http/middleware/ensureAuthenticated';
 import AppointmentsController from '@modules/appointments/infra/http/controllers/AppointmentsController';
 
 const appointmentsRouter = Router();
