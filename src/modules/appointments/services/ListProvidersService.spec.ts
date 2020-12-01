@@ -1,7 +1,7 @@
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 import ListProvidersService from './ListProvidersService';
 
-describe('UpdateProfile', () => {
+describe('ListProvider', () => {
     let fakeUsersRepository: FakeUsersRepository;
     let listProviders: ListProvidersService;
 
