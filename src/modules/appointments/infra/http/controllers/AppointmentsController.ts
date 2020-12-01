@@ -19,7 +19,7 @@ export default class AppointmentsController {
         return response.status(201).json(appointment);
     }
 
-    public async findAll(request: Request, response: Response): Promise<Response> {
+    public async index(request: Request, response: Response): Promise<Response> {
         const appointmentsRepository = new AppointmentsRepository();
         const appointments = await appointmentsRepository.find();
 
