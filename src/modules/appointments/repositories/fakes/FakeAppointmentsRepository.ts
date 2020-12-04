@@ -30,10 +30,6 @@ class FakeAppointmentsRepository implements IAppointmentsRepository {
         return appointment;
     }
 
-    public async find(): Promise<Appointment[]> {
-        return this.appointments;
-    }
-
     public async findAllInMonthFromProvider({
         providerId,
         year,
