@@ -6,6 +6,7 @@ import AppError from '@shared/errors/AppError';
 
 import IAppointmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository';
 import INotificationsRepository from '@modules/notifications/repositories/INotificationsRepository';
+import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
 
 interface IRequest {
     providerId: string;
@@ -21,6 +22,9 @@ class CreateAppointmentService {
 
         @inject('NotificationsRepository')
         private notificationsRepository: INotificationsRepository,
+
+        @inject('CacheProvider')
+        private cacheProvider: ICacheProvider,
     ) {}
 
     public async execute({ providerId, userId, date }: IRequest): Promise<Appointment> {
@@ -56,6 +60,10 @@ class CreateAppointmentService {
             content: `New appointment on ${notificationDate}`,
             recipientId: providerId,
         });
+
+        await this.cacheProvider.invalidate(
+            `appointments-provider:${providerId}:${format(appointmentDate, 'yyyy-M-d')}`,
+        );
 
         return appointment;
     }
