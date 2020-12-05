@@ -8,7 +8,7 @@ import UsersController from '@modules/users/infra/http/controllers/UsersControll
 import ProfileController from '@modules/users/infra/http/controllers/ProfileController';
 
 const usersRouter = Router();
-const upload = multer(uploadConfig);
+const upload = multer(uploadConfig.multer);
 const usersController = new UsersController();
 const profileController = new ProfileController();
 
