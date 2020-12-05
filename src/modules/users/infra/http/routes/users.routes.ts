@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import multer from 'multer';
+import { celebrate, Joi, Segments } from 'celebrate';
 
 import uploadConfig from '@config/upload';
 import ensureAuthenticated from '@modules/users/infra/http/middleware/ensureAuthenticated';
@@ -11,10 +12,33 @@ const upload = multer(uploadConfig);
 const usersController = new UsersController();
 const profileController = new ProfileController();
 
-usersRouter.post('/', usersController.create);
+usersRouter.post(
+    '/',
+    celebrate({
+        [Segments.BODY]: {
+            name: Joi.string().required(),
+            email: Joi.string().email().required(),
+            password: Joi.string().required(),
+        },
+    }),
+    usersController.create,
+);
 
 usersRouter.patch('/avatar', ensureAuthenticated, upload.single('avatar'), usersController.updateAvatar);
 
-usersRouter.put('/profile', ensureAuthenticated, profileController.update);
+usersRouter.put(
+    '/profile',
+    celebrate({
+        [Segments.BODY]: {
+            name: Joi.string().required(),
+            email: Joi.string().email().required(),
+            oldPassword: Joi.string(),
+            password: Joi.string(),
+            passwordConfirmation: Joi.string().valid(Joi.ref('password')),
+        },
+    }),
+    ensureAuthenticated,
+    profileController.update,
+);
 
 export default usersRouter;
