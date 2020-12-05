@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 
 import UpdateProfileService from '@modules/users/services/UpdateProfileService';
-import UserMap from '@modules/users/mappers/UserMap';
 
 export default class ProfileController {
     public async update(request: Request, response: Response): Promise<Response> {
@@ -15,6 +15,6 @@ export default class ProfileController {
             oldPassword,
             password,
         });
-        return response.json(UserMap.toDTO(user));
+        return response.json(classToClass(user));
     }
 }
