@@ -42,7 +42,7 @@ class CreateAppointmentService {
             throw new AppError("You can't create an appointment on a past date");
         }
 
-        const appointmentOnSameTime = await this.appointmentsRepository.findByDate(appointmentDate);
+        const appointmentOnSameTime = await this.appointmentsRepository.findByDate(appointmentDate, providerId);
 
         if (appointmentOnSameTime) {
             throw new AppError('There is already a booked appointment');
