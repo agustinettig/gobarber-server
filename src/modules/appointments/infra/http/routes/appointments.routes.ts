@@ -24,7 +24,7 @@ appointmentsRouter.post(
 appointmentsRouter.get(
     '/schedule',
     celebrate({
-        [Segments.BODY]: {
+        [Segments.QUERY]: {
             year: Joi.string().required(),
             month: Joi.string().required(),
             day: Joi.string().required(),
